@@ -1,0 +1,25 @@
+.events-filter__select {
+  width: 100%;
+  height: 44px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.events-filter__select {
+  padding: 0 38px 0 13px;
+}
+
+.events-filter__select:hover {
+  border-color: var(--border-hover);
+}
+
+.events-filter__select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
