@@ -1,27 +1,29 @@
 import Button from "../../../core/components/Button/Button";
+import type { IEvent } from "../../../core/types/event";
 import "./EventsCard.css"
 
-export default function EventsCard() {
+export default function EventsCard({eventItem}: {eventItem: IEvent}) {
   return (
     <article className="event-card">
       <div className="event-card__main">
         <div className="event-card__header">
           <div>
-            <div className="event-card__type">Meetup</div>
+            <div className="event-card__type">
+              {eventItem.type}
+            </div>
 
             <h2 className="event-card__title">
-              React Warsaw Meetup
+              {eventItem.title}
             </h2>
           </div>
 
-          <span className="status status--published">
-            Published
+          <span className={`status status--${eventItem.status}`}>
+            {eventItem.status}
           </span>
         </div>
 
         <p className="event-card__description">
-          Meetup about modern React development, performance and
-          frontend architecture.
+          {eventItem.description}
         </p>
 
         <div className="event-card__details">
@@ -31,7 +33,7 @@ export default function EventsCard() {
             <div>
               <span className="event-card__detail-label">Date</span>
               <span className="event-card__detail-value">
-                Oct 5, 2026 · 18:00 – 21:00
+                {new Date(eventItem.startDate).toLocaleString()}
               </span>
             </div>
           </div>
@@ -42,7 +44,7 @@ export default function EventsCard() {
             <div>
               <span className="event-card__detail-label">Location</span>
               <span className="event-card__detail-value">
-                Warsaw, Poland
+                {eventItem.location}
               </span>
             </div>
           </div>
@@ -55,7 +57,7 @@ export default function EventsCard() {
                 Attendees
               </span>
               <span className="event-card__detail-value">
-                3 / 80
+                {eventItem.attendees.length} / {eventItem.capacity}
               </span>
             </div>
           </div>
@@ -63,7 +65,7 @@ export default function EventsCard() {
       </div>
 
       <footer className="event-card__footer">
-        <a href="/events/1" className="button button--secondary">
+        <a href={`/events/${eventItem.id}`} className="button button--secondary">
           View details
         </a>
 

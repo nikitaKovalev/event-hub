@@ -84,5 +84,37 @@
       "createdAt": "2026-09-26T13:00:00.000Z",
       "updatedAt": "2026-09-26T13:00:00.000Z"
     }
+  ],
+  "eventTypes": [
+    {
+      "id": 1,
+      "name": "conference"
+    },
+    {
+      "id": 2,
+      "name": "meetup"
+    },
+    {
+      "id": 3,
+      "name": "workshop"
+    },
+    {
+      "id": 4,
+      "name": "webinar"
+    }
+  ],
+  "eventStatuses": [
+    {
+      "id": 1,
+      "name": "draft"
+    },
+    {
+      "id": 2,
+      "name": "published"
+    },
+    {
+      "id": 3,
+      "name": "cancelled"
+    }
   ]
 }

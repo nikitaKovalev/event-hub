@@ -12,6 +12,9 @@ export type EventStatus =
   | "published"
   | "cancelled";
 
+export type EventStatusResponse = Array<{id: number; name: EventStatus}>;
+export type EventTypeResponse = Array<{id: number; name: EventType}>;
+
 export interface IEvent {
   id: string;
   title: string;

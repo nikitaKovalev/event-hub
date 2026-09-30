@@ -21,6 +21,7 @@ export default function EventsPage() {
 
   const {data, isLoading, isError} = useEvents({
     _page: Number(filters.page),
+    _sort: `startDate`,
     title: {startsWith: filters.title},
     status: {startsWith: filters.status},
     type: {startsWith: filters.type},
@@ -43,7 +44,7 @@ export default function EventsPage() {
       <EventsList>
         {
           data?.data?.map(event => {
-            return <EventsCard key={event.id} />
+            return <EventsCard key={event.id} eventItem={event} />
           })
         }
       </EventsList>

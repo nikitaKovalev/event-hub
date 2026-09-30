@@ -1,5 +1,7 @@
 import Input from "../../../core/components/Input/Input";
 import Select from "../../../core/components/Select/Select";
+import useEventsStatuses from "../../../core/hooks/useEventsStatuses";
+import useEventsTypes from "../../../core/hooks/useEventsTypes";
 import "./EventsFilter.css";
 
 interface EventsFilterProps {
@@ -21,6 +23,9 @@ export default function EventsFilter(
     onTypeChange,
   }: EventsFilterProps,
 ) {
+  const {data: statuses} = useEventsStatuses();
+  const {data: types} = useEventsTypes();
+
   return (
     <section className="events-filter">
       <div className="events-filter__search">
@@ -34,19 +39,38 @@ export default function EventsFilter(
         />
       </div>
 
-      <Select defaultValue={type} onChange={(event) => onTypeChange(event.target.value)}>
-        <option value="">All types</option>
-        <option value="conference">Conference</option>
-        <option value="meetup">Meetup</option>
-        <option value="workshop">Workshop</option>
-        <option value="webinar">Webinar</option>
+      <Select 
+        defaultValue=""
+        value={type}
+        onChange={(event) => onTypeChange(event.target.value)}
+      >
+        <option value="">ALL TYPES</option>
+        {
+          types.map(type => {
+            return (
+              <option key={type.id} value={type.name}>
+                {type.name.toUpperCase()}
+              </option>
+            );
+          })
+        }
       </Select>
 
-      <Select defaultValue={status} onChange={event => onStatusChange(event.target.value)}>
-        <option value="">All statuses</option>
-        <option value="published">Published</option>
-        <option value="draft">Draft</option>
-        <option value="cancelled">Cancelled</option>
+      <Select 
+        defaultValue=""
+        value={status}
+        onChange={event => onStatusChange(event.target.value)}
+      >
+        <option value="">ALL STATUSES</option>
+        {
+          statuses.map(status => {
+            return (
+              <option key={status.id} value={status.name}>
+                {status.name.toUpperCase()}
+              </option>
+            );
+          })
+        }
       </Select>
     </section>
   );
