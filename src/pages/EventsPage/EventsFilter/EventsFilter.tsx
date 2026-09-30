@@ -40,7 +40,6 @@ export default function EventsFilter(
       </div>
 
       <Select 
-        defaultValue=""
         value={type}
         onChange={(event) => onTypeChange(event.target.value)}
       >
@@ -57,7 +56,6 @@ export default function EventsFilter(
       </Select>
 
       <Select 
-        defaultValue=""
         value={status}
         onChange={event => onStatusChange(event.target.value)}
       >

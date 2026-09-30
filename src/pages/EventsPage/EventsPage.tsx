@@ -10,8 +10,11 @@ import "./EventsPage.css";
 import LoaderState from "../../core/components/States/LoaderState";
 import ErrorState from "../../core/components/States/ErrorState";
 import EmptyState from "../../core/components/States/EmptyState";
+import useModal from "../../core/hooks/useModal";
+import Modal from "../../core/components/Modal/Modal";
 
 export default function EventsPage() {
+  const {open, close, isOpened} = useModal();
   const {filters, setTitle, setStatus, setType} = useEventsUrlParams();
   const [search, setSearch] = useState(filters.title);
   const debouncedTitle = useDebounce(search);
@@ -65,6 +68,7 @@ export default function EventsPage() {
         <Button 
           variant="primary"
           startIcon={<span className="button__plus">+</span>}
+          onClick={open}
         >
           Create event
         </Button>
@@ -88,6 +92,14 @@ export default function EventsPage() {
       </div>
 
       {content}
+
+      <Modal
+        title="SOME TITLE"
+        isOpen={isOpened}
+        onClose={close}
+      >
+        <p>HELLO THERE!</p>
+      </Modal>
     </div>
   );
 }
