@@ -5,9 +5,22 @@ import "./EventsFilter.css";
 interface EventsFilterProps {
   search: string;
   onSearchChange: (text: string) => void;
+  status: string;
+  onStatusChange: (text: string) => void;
+  type: string;
+  onTypeChange: (text: string) => void;
 }
 
-export default function EventsFilter({search, onSearchChange}: EventsFilterProps) {
+export default function EventsFilter(
+  {
+    search, 
+    onSearchChange,
+    status,
+    onStatusChange,
+    type,
+    onTypeChange,
+  }: EventsFilterProps,
+) {
   return (
     <section className="events-filter">
       <div className="events-filter__search">
@@ -21,7 +34,7 @@ export default function EventsFilter({search, onSearchChange}: EventsFilterProps
         />
       </div>
 
-      <Select defaultValue="">
+      <Select defaultValue={type} onChange={(event) => onTypeChange(event.target.value)}>
         <option value="">All types</option>
         <option value="conference">Conference</option>
         <option value="meetup">Meetup</option>
@@ -29,7 +42,7 @@ export default function EventsFilter({search, onSearchChange}: EventsFilterProps
         <option value="webinar">Webinar</option>
       </Select>
 
-      <Select defaultValue="">
+      <Select defaultValue={status} onChange={event => onStatusChange(event.target.value)}>
         <option value="">All statuses</option>
         <option value="published">Published</option>
         <option value="draft">Draft</option>

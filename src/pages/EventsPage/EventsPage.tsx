@@ -9,7 +9,7 @@ import EventsList from "./EventsList/EventsList";
 import "./EventsPage.css";
 
 export default function EventsPage() {
-  const {filters, setTitle} = useEventsUrlParams();
+  const {filters, setTitle, setStatus, setType} = useEventsUrlParams();
   const [search, setSearch] = useState(filters.title);
   const debouncedTitle = useDebounce(search);
 
@@ -19,6 +19,8 @@ export default function EventsPage() {
   const {data} = useEvents({
     _page: Number(filters.page),
     title: {startsWith: filters.title},
+    status: {startsWith: filters.status},
+    type: {startsWith: filters.type},
   });
 
   return (
@@ -43,6 +45,10 @@ export default function EventsPage() {
       <EventsFilter
         search={search}
         onSearchChange={setSearch}
+        status={filters.status}
+        onStatusChange={setStatus}
+        type={filters.type}
+        onTypeChange={setType}
       />
 
       <div className="events-result">

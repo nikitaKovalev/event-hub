@@ -7,6 +7,14 @@ export const routes = createBrowserRouter([
     Component: App,
     children: [
       {
+        path: '',
+        index: true,
+        lazy: async () => {
+          const {default: Component} = await import("./pages/DashboardPage/DashboardPage");
+          return {Component};
+        },
+      },
+      {
         path: '/events',
         lazy: async () => {
           const {default: Component} = await import("./pages/EventsPage/EventsPage");

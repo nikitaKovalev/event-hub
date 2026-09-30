@@ -1,25 +1,41 @@
+import { NavLink } from "react-router";
 import "./Header.css";
 
 export default function Header() {
+  const links = [
+    {
+      to: '/',
+      children: 'Dashboard',
+    },
+    {
+      to: '/events',
+      children: 'Events',
+    },
+    {
+      to: '/attendees',
+      children: 'Attendees',
+    },
+  ];
+
   return (
     <header className="header">
       <div className="container header__inner">
-        <a href="/" className="header__logo">
+        <NavLink to="/" className="header__logo">
           Event<span>Hub</span>
-        </a>
+        </NavLink>
 
         <nav className="header__nav">
-          <a href="/" className="header__link">
-            Dashboard
-          </a>
-
-          <a href="/events" className="header__link header__link--active">
-            Events
-          </a>
-
-          <a href="/attendees" className="header__link">
-            Attendees
-          </a>
+          {
+            links.map(link => {
+              return (
+                <NavLink
+                  key={link.children}
+                  className={({isActive}) => `header__link ${isActive ? 'header__link--active' : ''}`}
+                  {...link}
+                />
+              )
+            })
+          }
         </nav>
 
         <div className="header__profile">
