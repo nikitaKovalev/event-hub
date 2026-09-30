@@ -1,3 +1,6 @@
+import type { ListResponse } from "./list-response";
+import type { QueryConditions, QueryList } from "./query-params";
+
 export type EventType =
   | "conference"
   | "meetup"
@@ -9,7 +12,7 @@ export type EventStatus =
   | "published"
   | "cancelled";
 
-export interface Event {
+export interface IEvent {
   id: string;
   title: string;
   description: string;
@@ -27,6 +30,9 @@ export interface Event {
   createdAt: string;
   updatedAt: string;
 }
+
+export type IEventResponse = ListResponse<IEvent>;
+export type IEventQueryParams = QueryList & QueryConditions<IEvent>;
 
 export type CreateEvent = Omit<
   Event,

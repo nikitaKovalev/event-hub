@@ -2,7 +2,12 @@ import Input from "../../../core/components/Input/Input";
 import Select from "../../../core/components/Select/Select";
 import "./EventsFilter.css";
 
-export default function EventsFilter() {
+interface EventsFilterProps {
+  search: string;
+  onSearchChange: (text: string) => void;
+}
+
+export default function EventsFilter({search, onSearchChange}: EventsFilterProps) {
   return (
     <section className="events-filter">
       <div className="events-filter__search">
@@ -11,6 +16,8 @@ export default function EventsFilter() {
         <Input
           type="text"
           placeholder="Search events..."
+          value={search}
+          onChange={event => onSearchChange(event.target.value.trim())}
         />
       </div>
 

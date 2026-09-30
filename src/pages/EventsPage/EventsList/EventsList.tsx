@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import "./EventsList.css";
+import styles from "./EventsList.module.css";
 
 export default function EventsList({children}: {children: ReactNode}) {
   return (
-    <section className="events-list">
+    <section className={styles.eventsList}>
       {children}
     </section>
   );
