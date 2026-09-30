@@ -32,6 +32,7 @@ export default function EventsFilter(
         <span className="events-filter__search-icon">⌕</span>
 
         <Input
+          style={{paddingLeft: '44px'}}
           type="text"
           placeholder="Search events..."
           value={search}

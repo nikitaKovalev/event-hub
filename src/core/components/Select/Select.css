@@ -23,3 +23,17 @@
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
+
+.events-filter__select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.events-filter__select--error:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.1);
+}
+
+.events-filter__select--error {
+  border-color: var(--danger);
+}

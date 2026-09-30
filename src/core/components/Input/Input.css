@@ -22,7 +22,7 @@
 }
 
 .events-filter__input {
-  padding: 0 14px 0 44px;
+  padding: 0 14px 0 14px;
 }
 
 .events-filter__input::placeholder {
@@ -36,4 +36,18 @@
 .events-filter__input:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.event-filter__input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.event-filter__input--error:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.1);
+}
+
+.event-filter__input--error {
+  border-color: var(--danger);
 }

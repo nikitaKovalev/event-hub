@@ -12,6 +12,7 @@ import ErrorState from "../../core/components/States/ErrorState";
 import EmptyState from "../../core/components/States/EmptyState";
 import useModal from "../../core/hooks/useModal";
 import Modal from "../../core/components/Modal/Modal";
+import CreateEventForm from "./CreateEventForm/CreateEventForm";
 
 export default function EventsPage() {
   const {open, close, isOpened} = useModal();
@@ -94,11 +95,11 @@ export default function EventsPage() {
       {content}
 
       <Modal
-        title="SOME TITLE"
+        title="Create Event"
         isOpen={isOpened}
         onClose={close}
       >
-        <p>HELLO THERE!</p>
+        <CreateEventForm/>
       </Modal>
     </div>
   );
