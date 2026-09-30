@@ -13,6 +13,8 @@ export default function useEvents(params: IEventQueryParams) {
   const queryParams = buildQueryParams(params);
 
   useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
     const controller = new AbortController();
 
     getEvents(queryParams, controller.signal)

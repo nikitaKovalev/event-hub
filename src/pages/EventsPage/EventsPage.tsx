@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../../core/components/Button/Button";
 import useDebounce from "../../core/hooks/useDebounce";
 import useEvents from "../../core/hooks/useEvents";
@@ -7,6 +7,9 @@ import EventsCard from "./EventsCard/EventsCard";
 import EventsFilter from "./EventsFilter/EventsFilter";
 import EventsList from "./EventsList/EventsList";
 import "./EventsPage.css";
+import LoaderState from "../../core/components/States/LoaderState";
+import ErrorState from "../../core/components/States/ErrorState";
+import EmptyState from "../../core/components/States/EmptyState";
 
 export default function EventsPage() {
   const {filters, setTitle, setStatus, setType} = useEventsUrlParams();
@@ -16,12 +19,36 @@ export default function EventsPage() {
   useEffect(() => setSearch(filters.title), [filters.title]);
   useEffect(() => setTitle(debouncedTitle), [debouncedTitle]);
 
-  const {data} = useEvents({
+  const {data, isLoading, isError} = useEvents({
     _page: Number(filters.page),
     title: {startsWith: filters.title},
     status: {startsWith: filters.status},
     type: {startsWith: filters.type},
   });
+
+  const content = useMemo(() => {
+    if (isLoading) {
+      return <LoaderState />;
+    }
+
+    if (isError) {
+      return <ErrorState />;
+    }
+
+    if (!isLoading && !data?.data.length) {
+      return <EmptyState />;
+    }
+
+    return (
+      <EventsList>
+        {
+          data?.data?.map(event => {
+            return <EventsCard key={event.id} />
+          })
+        }
+      </EventsList>
+    );
+  }, [data, isError, isLoading]);
 
   return (
     <div className="container">
@@ -52,20 +79,14 @@ export default function EventsPage() {
       />
 
       <div className="events-result">
-        <span className="events-result__count">6 events</span>
+        <span className="events-result__count">{data?.data.length} events</span>
 
         <span className="events-result__hint">
           Sorted by upcoming
         </span>
       </div>
 
-      <EventsList>
-        {
-          data?.data?.map(event => {
-            return <EventsCard key={event.id} />
-          })
-        }
-      </EventsList>
+      {content}
     </div>
   );
 }
